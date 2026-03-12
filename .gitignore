@@ -1,0 +1,32 @@
+# Go
+/api/bin/
+*.exe
+
+# Python
+embeddings/.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pkl
+*.npy
+
+# React Native
+app/node_modules/
+app/.expo/
+app/android/
+app/ios/
+
+# Environment
+.env
+.env.local
+
+# Docker
+.docker/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
