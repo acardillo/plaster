@@ -1,5 +1,7 @@
 # Plaster
 
+[![CI](https://github.com/acardillo/plaster/actions/workflows/test.yml/badge.svg)](https://github.com/acardillo/plaster/actions/workflows/test.yml)
+
 Search for concert posters by image. In progress.
 
 ## Running the app
