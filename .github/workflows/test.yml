@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  embeddings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build embeddings image
+        run: docker compose build embeddings
+
+      - name: Run embedding service tests
+        run: docker compose run --rm embeddings python -m pytest -v
