@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+open_clip_torch
+torch
+Pillow
+numpy
+python-multipart
+
+# test
+pytest
+pytest-asyncio
+httpx
