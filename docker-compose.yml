@@ -1,0 +1,19 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16 # Postgres 16 with pgvector extension pre-installed
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: plaster
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  embeddings:
+    build: ./embeddings
+    ports:
+      - '8001:8001'
+
+volumes:
+  pgdata:

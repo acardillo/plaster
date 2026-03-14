@@ -5,6 +5,7 @@
 # Python
 embeddings/.venv/
 __pycache__/
+.pytest_cache/
 *.pyc
 *.pyo
 *.pkl
