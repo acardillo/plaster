@@ -29,3 +29,22 @@ class TestEmbed:
     def test_missing_file_returns_422(self):
         resp = client.post("/embed")
         assert resp.status_code == 422
+
+    def test_invalid_image_returns_422(self):
+        with patch("main.get_embedding", new_callable=AsyncMock, side_effect=ValueError("Invalid or unsupported image")):
+            resp = client.post(
+                "/embed",
+                files={"image": ("file.txt", b"not an image", "text/plain")},
+            )
+        assert resp.status_code == 422
+        assert "invalid" in resp.json()["detail"].lower() or "unsupported" in resp.json()["detail"].lower()
+
+    def test_model_load_error_returns_503(self):
+        from pipeline import ModelLoadError
+        with patch("main.get_embedding", new_callable=AsyncMock, side_effect=ModelLoadError("Model failed to load")):
+            resp = client.post(
+                "/embed",
+                files={"image": ("poster.png", make_image_bytes(), "image/png")},
+            )
+        assert resp.status_code == 503
+        assert "unavailable" in resp.json()["detail"].lower()

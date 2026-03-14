@@ -46,3 +46,11 @@ class TestGetEmbedding:
         fake_model, _ = mock_clip
         await get_embedding(_upload(make_image_bytes()))
         fake_model.encode_image.assert_called_once()
+
+    async def test_empty_file_raises(self, mock_clip):
+        with pytest.raises(ValueError, match="Empty file"):
+            await get_embedding(_upload(b""))
+
+    async def test_invalid_image_raises(self, mock_clip):
+        with pytest.raises(ValueError, match="Invalid or unsupported image"):
+            await get_embedding(_upload(b"not an image"))
